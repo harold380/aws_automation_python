@@ -29,9 +29,10 @@ def cli(profile):
     """Webotron deploys websites to AWS."""
     global session, bucket_manager
 
+
     session_cfg = {}
     if profile:
-        session_cfg['profile_name'] = profile
+         session_cfg['profile_name'] = profile
 
     session = boto3.Session(**session_cfg)
     bucket_manager = BucketManager(session)
@@ -69,6 +70,7 @@ def setup_bucket(bucket):
 def sync(pathname, bucket):
     """Sync contents pf PATHNAME to BUCKET."""
     bucket_manager.sync(pathname, bucket)
+    print(bucket_manager.get_bucket_url(bucket_manager.s3.Bucket(bucket)))
 
 
 if __name__ == '__main__':
